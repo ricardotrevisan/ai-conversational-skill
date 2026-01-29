@@ -1,0 +1,9 @@
+.venv/
+.env
+runs/*
+*.wav
+*.mp3
+*.pcm
+__pycache__/
+.idea/
+.vscode/

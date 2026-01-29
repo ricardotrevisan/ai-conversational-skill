@@ -1,0 +1,12 @@
+[tool.pyrefly]
+exclude = [
+  ".venv",
+  "venv",
+  "node_modules",
+  "__pycache__",
+  "models",
+  "data",
+  "audio",
+  "dist",
+  "build"
+]
