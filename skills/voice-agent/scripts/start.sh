@@ -33,7 +33,7 @@ echo "🚀 Starting new container '$CONTAINER_NAME'..."
 # Assuming .env and ~/.aws exist in the current directory context or user home
 # We need to resolve absolute paths for volumes usually, but ~ works in shell expansion.
 # We also assume we are running this from the repo root or similar, but the skill might be run from anywhere.
-# If run by Moltbot, CWD might be anywhere.
+# If run by Openclaw, CWD might be anywhere.
 # However, the docker command relies on .env being present.
 # We will assume the user has configured the repo.
 

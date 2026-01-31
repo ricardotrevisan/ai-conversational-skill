@@ -20,6 +20,7 @@ docker run -d -p 8000:8000 \
   -e AWS_ACCESS_KEY_ID=your_key \
   -e AWS_SECRET_ACCESS_KEY=your_secret \
   -e AWS_REGION=us-east-1 \
+  -e OPENAI_API_KEY=sk-... \
   trevisanricardo/ai-voice-backend:latest
 ```
 
@@ -40,6 +41,7 @@ Secrets and settings are passed via Environment Variables.
 | `AWS_ACCESS_KEY_ID` | AWS Key for Polly TTS | Required |
 | `AWS_SECRET_ACCESS_KEY` | AWS Secret for Polly TTS | Required |
 | `AWS_REGION` | AWS Region (e.g., us-east-1) | `us-east-1` |
+| `OPENAI_API_KEY` | OpenAI API Key (required for initialization) | Required |
 | `LANGUAGE` | Default Language Code | `pt` |
 | `WHISPER_DEVICE` | Inference device (`cuda` or `cpu`) | `cuda` |
 | `WHISPER_COMPUTE_TYPE` | Precision (`float16` or `int8`) | `float16` |
@@ -62,9 +64,12 @@ Convert text to audio.
 -   **Output**: `{"status": "ok", "mode": "pt"}`
 
 ## Agent Integration (Client Script)
-This backend is designed to work with lightweight agents like **Moltbot** (formerly clawdbot).
+This backend is designed to work with lightweight agents like **Openclaw** (formerly clawdbot).
 It serves as a robust alternative to the plugnplay framework for Voice I/O.
 See [https://github.com/ricardotrevisan/ai-conversational-skill](https://github.com/ricardotrevisan/ai-conversational-skill) for the `voice-agent` skill client implementation.
+
+### OpenClaw Bundle
+This Docker image is the foundational backend for the **[Voice Agent Skill on ClawHub](https://www.clawhub.com/ricardotrevisan/voice-agent)**. You can bundle this skill with your OpenClaw agents to instantly enable voice capabilities.
 
 ## License
 MIT

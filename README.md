@@ -4,7 +4,7 @@
 
 This project is a **local-first, modular voice AI agent** built in Python, designed to evolve from a simple headset-based prototype into a full production-grade telephone agent.
 
-It also serves as a specialized **Voice Skill** for **[Moltbot](https://github.com/ricardotrevisan/ai-conversational-skill)** (formerly clawdbot), providing a high-performance, containerized alternative to the default plugnplay TTS/STT framework.
+It also serves as a specialized **Voice Skill** for **[Openclaw](https://github.com/ricardotrevisan/ai-conversational-skill)** (formerly clawdbot), providing a high-performance, containerized alternative to the default plugnplay TTS/STT framework.
 
 The system implements a real-time conversational loop using:
 
@@ -72,12 +72,13 @@ Future phases extend the same core into:
 
 ---
 
-## Moltbot Integration (Voice Skill)
+## Openclaw Integration (Voice Skill)
 
-This project is designed to act as the "ears and mouth" for the Moltbot agent ecosystem. By running this service as a Docker container, it replaces heavier or more complex plugins, offering:
+This project is designed to act as the "ears and mouth" for the Openclaw agent ecosystem. By running this service as a Docker container, it replaces heavier or more complex plugins, offering:
 *   **Dedicated Resources**: Runs STT/TTS in its own container (GPU-accelerated).
-*   **Standard API**: Exposes endpoints that Moltbot's `voice-agent` skill consumes.
+*   **Standard API**: Exposes endpoints that Openclaw's `voice-agent` skill consumes.
 *   **WhatsApp Compatibility**: Specifically tuned to generate MP3/Opus audio that works with mobile messaging apps.
+*   **OpenClaw Bundle**: This project powers the **[Voice Agent Skill](https://www.clawhub.com/ricardotrevisan/voice-agent)** on OpenClaw. Installing this skill provides the necessary client logic to interact with this voice backend.
 
 ---
 
@@ -86,7 +87,7 @@ This project is designed to act as the "ears and mouth" for the Moltbot agent ec
 ### Local Chat Loop
 To run the interactive voice agent locally:
 1.  Install dependencies: `pip install -r requirements.txt`
-2.  Setup `.env` (see `.env.example`)
+2.  Setup `.env` (see `.env.example`). You will need your OpenAI API Key and AWS Credentials.
 3.  Run: `python main.py`
 
 ### API & Docker (New!)
