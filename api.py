@@ -64,6 +64,8 @@ async def text_to_speech(request: TTSRequest):
          raise HTTPException(status_code=400, detail=f"Format '{output_format}' not supported. Options: pcm, mp3, ogg_vorbis")
 
     voice_id = VOICE_CONFIG[target_lang]["voice_id"]
+    print(f"🗣️ TTS Request: '{request.text}' (Length: {len(request.text)})")
+    
     
     try:
         response = POLLY_CLIENT.synthesize_speech(
