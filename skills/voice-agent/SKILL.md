@@ -46,3 +46,11 @@ To check if the voice agent API is running and healthy:
 ```bash
 python3 {baseDir}/scripts/client.py health
 ```
+
+### Service Management
+If the `Health Check` fails or you receive a connection error, the service may be stopped.
+You can attempt to start it by running:
+
+```bash
+{baseDir}/scripts/start.sh
+```
