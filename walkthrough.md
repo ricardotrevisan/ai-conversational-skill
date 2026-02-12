@@ -58,6 +58,7 @@ docker run --gpus all --env-file .env -p 8000:8000 voice-agent-api
 (The container now enforces `HF_HUB_OFFLINE=1` by default).
 
 The API will be available at `http://localhost:8000`.
+On startup, the API initializes runtime services (Whisper/Polly/OpenAI). If startup fails, verify credentials and runtime configuration before sending requests.
 
 ## 🔐 Security Notes
 - Prefer building from local source when possible.
@@ -119,3 +120,4 @@ play -t raw -r 16000 -e signed -b 16 -c 1 output.pcm
 ## ⚠️ Notes
 *   **Cold Start**: The first request might be slow as models load into memory, though we preload them at startup.
 *   **GPU**: If you have a GPU, pass `--gpus all` to `docker run` for faster Whisper inference.
+*   **Health Endpoint**: `GET /health` confirms API process readiness and active language mode.

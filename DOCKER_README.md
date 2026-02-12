@@ -1,4 +1,4 @@
-# AI Voice Backend v1.0.2
+# AI Voice Backend v1.1.0
 
 A high-performance, containerized Voice API designed for AI Agents.
 It provides **GPU-accelerated Speech-to-Text (STT)** via Faster-Whisper and **Text-to-Speech (TTS)** via AWS Polly (or other engines) in a simple REST API.
@@ -43,6 +43,7 @@ docker run -d --gpus all -p 8000:8000 \
 ## Runtime Notes
 - `HF_HUB_OFFLINE=1` disables model downloads from Hugging Face at runtime.
 - The service still requires internet access for OpenAI and AWS Polly API calls.
+- Runtime services are initialized at API startup; credential/model issues fail fast during startup.
 
 ## Configuration
 

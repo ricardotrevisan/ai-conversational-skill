@@ -31,6 +31,11 @@ AWS Polly (TTS)
 Speaker
 ```
 
+### Runtime Modules (v1.1.0)
+- `voice_runtime.py`: shared runtime services and env-based configuration (Whisper, Polly, OpenAI clients).
+- `api.py`: FastAPI app with lifespan-managed startup that initializes runtime services.
+- `main.py`: interactive local voice loop that consumes the same shared runtime module.
+
 This approach prioritizes:
 
 * Low operational complexity
@@ -99,3 +104,8 @@ See **[walkthrough.md](walkthrough.md)** for detailed instructions on:
 *   Building the Docker image
 *   Running with GPU or CPU
 *   Using the API endpoints (`/transcribe`, `/tts`)
+
+### Testing
+- Baseline API tests are included under `tests/`.
+- Syntax validation command:
+  - `python3 -m py_compile voice_runtime.py api.py main.py tests/test_api.py`

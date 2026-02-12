@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.0] - 2026-02-12
+### Changed
+- Backend architecture now uses shared runtime services (`voice_runtime.py`) across API and local loop.
+- API startup now owns runtime initialization through lifespan hooks.
+- Added baseline API test scaffolding under `tests/`.
+
 ## [1.0.2] - 2026-02-12
 ### Changed
 - Converted the skill to client-only operation; removed service startup from `SKILL.md`.
