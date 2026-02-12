@@ -1,15 +1,18 @@
-# AI Voice Backend
+# AI Voice Backend v1.0.2
 
 A high-performance, containerized Voice API designed for AI Agents.
 It provides **GPU-accelerated Speech-to-Text (STT)** via Faster-Whisper and **Text-to-Speech (TTS)** via AWS Polly (or other engines) in a simple REST API.
 
 This image is designed to be the "ears and mouth" of your AI infrastructure, decoupling heavy audio processing from your main agent logic.
 
+The OpenClaw `voice-agent` skill is client-only and should connect to this backend after you start it.
+
 ## Features
 -   ✅ **Speech-to-Text**: Faster-Whisper (OpenAI Whisper) with VAD (Voice Activity Detection).
 -   ✅ **Text-to-Speech**: AWS Polly Neural integration.
 -   ✅ **GPU Accelerated**: Built on `nvidia/cuda` runtime for sub-second inference.
 -   ✅ **Offline Ready**: Pre-downloads models (Whisper small/medium) to avoid runtime downloads.
+-   ✅ **Hardened Runtime**: Runs as non-root user and exposes a container health check.
 -   ✅ **Containerized**: Drop-in replacement for audio handling in any agent stack.
 
 ## Quick Start
@@ -31,6 +34,15 @@ docker run -d --gpus all -p 8000:8000 \
   --env-file .env \
   trevisanricardo/ai-voice-backend:latest
 ```
+
+## Security Notes
+- Do not mount host credential directories into the container by default.
+- Prefer local builds from source when possible.
+- If using a published image, pin by digest (`image@sha256:...`) and verify publisher/source.
+
+## Runtime Notes
+- `HF_HUB_OFFLINE=1` disables model downloads from Hugging Face at runtime.
+- The service still requires internet access for OpenAI and AWS Polly API calls.
 
 ## Configuration
 

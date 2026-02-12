@@ -1,7 +1,7 @@
 ---
 name: voice-agent
 display-name: AI Voice Agent Backend
-version: 1.0.0
+version: 1.0.2
 description: Local Voice Input/Output for Agents using the AI Voice Agent API.
 author: trevisanricardo
 homepage: https://github.com/ricardotrevisan/ai-conversational-skill
@@ -11,7 +11,15 @@ disable-model-invocation: false
 
 # Voice Agent
 
-This skill allows you to speak and listen to the user using the local Voice Agent API.
+This skill allows you to speak and listen to the user using a local Voice Agent API.
+It is client-only and does not start containers or services.
+
+## Prerequisite
+The backend service must already be running at `http://localhost:8000`.
+Backend setup instructions are in this repository:
+- `README.md`
+- `walkthrough.md`
+- `DOCKER_README.md`
 
 ## Behavior Guidelines
 -   **Audio First**: When the user communicates via audio (files), your PRIMARY mode of response is **Audio File**.
@@ -45,12 +53,4 @@ To check if the voice agent API is running and healthy:
 
 ```bash
 python3 {baseDir}/scripts/client.py health
-```
-
-### Service Management
-If the `Health Check` fails or you receive a connection error, the service may be stopped.
-You can attempt to start it by running:
-
-```bash
-{baseDir}/scripts/start.sh
 ```

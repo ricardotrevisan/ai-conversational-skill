@@ -2,11 +2,8 @@ import argparse
 import sys
 import json
 import os
-import time
 import urllib.request
-import urllib.parse
 import urllib.error
-import mimetypes
 import uuid
 
 API_URL = "http://localhost:8000"
@@ -23,7 +20,7 @@ def check_health():
                 return False
     except urllib.error.URLError:
         print("❌ Could not connect to Voice Agent API (localhost:8000). Is the Docker container running?")
-        print("Run 'scripts/start.sh' to check configuration.")
+        print("Ensure your Voice Agent backend service is running and reachable.")
         return False
     except Exception as e:
         print(f"❌ Health check error: {e}")
@@ -45,24 +42,7 @@ def transcribe(filename):
         # Multipart upload using standard library
         boundary = uuid.uuid4().hex
         headers = {'Content-Type': f'multipart/form-data; boundary={boundary}'}
-        
-        part_boundary = f'--{boundary}'.encode()
-        
-        body = []
-        body.append(part_boundary)
-        body.append(f'Content-Disposition: form-data; name="file"; filename="{os.path.basename(filename)}"'.encode())
-        body.append(b'Content-Type: application/octet-stream')
-        body.append(b'')
-        
-        with open(filename, 'rb') as f:
-            body.append(f.read())
-            
-        body.append(body[-1]) # Hack/Safety? No.
-        
-        # Correct body formation
-        final_body = b'\r\n'.join(body) + b'\r\n' + part_boundary + b'--\r\n'
-        
-        #Wait, simpler way: just bytes concatenation
+
         data = b''
         data += f'--{boundary}\r\n'.encode()
         data += f'Content-Disposition: form-data; name="file"; filename="{os.path.basename(filename)}"\r\n'.encode()

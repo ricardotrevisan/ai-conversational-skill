@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2] - 2026-02-12
+### Changed
+- Converted the skill to client-only operation; removed service startup from `SKILL.md`.
+- Removed `scripts/start.sh` from the skill package path.
+- Updated skill instructions to require a separately managed backend at `http://localhost:8000`.
+- Cleaned `client.py` by removing dead multipart/experimental code.
+
 ## [1.0.0] - 2026-01-28
 ### Added
 - Initial release of the Voice Agent Skill.

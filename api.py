@@ -1,7 +1,6 @@
 import os
 import shutil
 import tempfile
-import numpy as np
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
@@ -60,7 +59,7 @@ async def text_to_speech(request: TTSRequest):
         # Fallback or error? Let's error to be explicit, or fallback to pt
         raise HTTPException(status_code=400, detail=f"Language '{target_lang}' not supported. Options: {list(VOICE_CONFIG.keys())}")
     
-    if output_format not in ["pcm", "mp3", "ogg_vorbis", "json"]:
+    if output_format not in ["pcm", "mp3", "ogg_vorbis"]:
          raise HTTPException(status_code=400, detail=f"Format '{output_format}' not supported. Options: pcm, mp3, ogg_vorbis")
 
     voice_id = VOICE_CONFIG[target_lang]["voice_id"]
@@ -81,8 +80,7 @@ async def text_to_speech(request: TTSRequest):
         media_types = {
             "pcm": "application/octet-stream",
             "mp3": "audio/mpeg",
-            "ogg_vorbis": "audio/ogg",
-            "json": "application/json"
+            "ogg_vorbis": "audio/ogg"
         }
         
         return StreamingResponse(audio_stream, media_type=media_types.get(output_format, "application/octet-stream"))

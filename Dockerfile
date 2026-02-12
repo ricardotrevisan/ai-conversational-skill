@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.4.1-runtime-ubuntu22.04
+FROM nvidia/cuda@sha256:517da2300c184c9999ec203c2665244bdebd3578d12fcc7065e83667932643d9
 
 # Install python3 and system dependencies for audio
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,16 +21,26 @@ COPY . .
 # Set default environment variables for GPU inference
 ENV WHISPER_DEVICE=cuda
 ENV WHISPER_COMPUTE_TYPE=float16
+ENV HF_HOME=/opt/hf-cache
 
 # Pre-download Whisper model (small) to bake it into the image
 # Note: we use device='cpu' here just for the download step, otherwise it fails during build if no GPU
+RUN mkdir -p ${HF_HOME}
 RUN python3 -c "from faster_whisper import WhisperModel; WhisperModel('small', device='cpu', compute_type='int8')"
 
 # Set offline mode AFTER download so runtime creates no new connections
 ENV HF_HUB_OFFLINE=1
 
+# Run as a non-root user at runtime
+RUN useradd -m -u 10001 appuser && chown -R appuser:appuser /app ${HF_HOME}
+USER appuser
+
 # Expose port
 EXPOSE 8000
+
+# Container health check endpoint
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
+  CMD python3 -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)" || exit 1
 
 # Run API
 CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]

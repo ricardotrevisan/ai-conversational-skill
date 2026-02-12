@@ -80,6 +80,9 @@ This project is designed to act as the "ears and mouth" for the Openclaw agent e
 *   **WhatsApp Compatibility**: Specifically tuned to generate MP3/Opus audio that works with mobile messaging apps.
 *   **OpenClaw Bundle**: This project powers the **[Voice Agent Skill](https://www.clawhub.com/ricardotrevisan/voice-agent)** on OpenClaw. Installing this skill provides the necessary client logic to interact with this voice backend.
 
+The `voice-agent` skill is client-only. It does not start Docker containers or manage backend runtime.
+Run backend setup from this repository docs (`walkthrough.md`, `DOCKER_README.md`) and then use the skill client against `http://localhost:8000`.
+
 ---
 
 ## How to Run

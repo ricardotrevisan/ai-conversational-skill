@@ -2,6 +2,8 @@
 
 This document explains how to run the Voice Agent STT/TTS services as an API using Docker.
 
+The OpenClaw `voice-agent` skill is client-only and does not start containers. Use this document to run the backend service separately.
+
 ## 🐳 Docker Deployment
 
 ### Prerequisites (GPU Support)
@@ -31,13 +33,6 @@ The build process includes a step to **download and cache the model**, so it mig
 docker build -t voice-agent-api .
 ```
 
-4.  **Update Config**:
-    Edit `skills/voice-agent/scripts/start.sh` to use the new image name:
-    ```bash
-    IMAGE_NAME="trevisanricardo/ai-voice-backend:latest"
-    ```
-    *Note: `start.sh` will attempt to pull the latest version of this image on every run.*
-
 ### 2. Run the Container
 
 **Option A: With GPU (Recommended)**
@@ -63,6 +58,10 @@ docker run --gpus all --env-file .env -p 8000:8000 voice-agent-api
 (The container now enforces `HF_HUB_OFFLINE=1` by default).
 
 The API will be available at `http://localhost:8000`.
+
+## 🔐 Security Notes
+- Prefer building from local source when possible.
+- If using a published image, pin and verify by digest.
 
 ---
 

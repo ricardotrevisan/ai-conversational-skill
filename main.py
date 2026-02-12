@@ -19,7 +19,6 @@ CHANNELS = 1
 DTYPE = "int16"
 LLM_MODEL = "gpt-5-mini" 
 WHISPER_SIZE = "small" 
-WHISPER_SIZE = "small" 
 COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "float16")
 DEVICE = os.getenv("WHISPER_DEVICE", "cuda")
 
