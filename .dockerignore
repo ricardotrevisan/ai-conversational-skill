@@ -1,8 +1,33 @@
-__pycache__
-.venv
-**/.env
+# VCS / editor
 .git
+.gitignore
 .idea
 .vscode
+
+# Python caches / env
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+
+# Secrets
+.env
+**/.env
+.env.*
+**/.env.*
+
+# Local artifacts
 current_input.wav
 output.pcm
+*.log
+
+# Not needed in runtime image
+skills/
+tests/
+task-description.md
+improvements-plan.md
+walkthrough.md
+DOCKER_README.md
+README.md
