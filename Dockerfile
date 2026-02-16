@@ -1,4 +1,5 @@
-FROM nvidia/cuda@sha256:517da2300c184c9999ec203c2665244bdebd3578d12fcc7065e83667932643d9
+ARG CUDA_IMAGE=nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu22.04
+FROM ${CUDA_IMAGE}
 
 # Install python3 and system dependencies for audio
 ENV DEBIAN_FRONTEND=noninteractive
